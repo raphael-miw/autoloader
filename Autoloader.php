@@ -20,7 +20,7 @@ class Autoloader
         // ex : Html\Page\PageArticle
         $path = explode('\\',$className);
 
-        $classFileName = "src/".implode("/",$path).".php";
+        $classFileName = __DIR__."/src/".implode("/",$path).".php";
         // ex : "src/Html/Page/PageArticle.php
         if(file_exists($classFileName)) {
             require_once $classFileName;
