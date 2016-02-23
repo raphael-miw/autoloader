@@ -1,8 +1,6 @@
 <?php
 
-include_once "Autoloader.php";
-$autoloader = new Autoloader();
-spl_autoload_register(array($autoloader,"loadClass"));
+$autoloader = require "vendor/autoload.php";
 
 $a = new \Html\Page\PageArticle();
 echo $a;  // __toString()
