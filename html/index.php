@@ -5,7 +5,12 @@ $autoloader = require "../vendor/autoload.php";
 
 // ne peut être utilisé QUE si le classmap a été généré :
 // composer  dumpautoload -o
-$autoloader -> setClassMapAuthoritative(true);
+//$autoloader -> setClassMapAuthoritative(true);
 
-$a = new \Html\Page\PageArticle();
-echo $a;  // __toString()
+/** @var \NanoFramework\Html\SimpleRouteur $routeur */
+$routeur = new \MyWebsite\MyRouteur();
+$routeur -> initCurrentURL();
+$page = $routeur -> getPage();
+
+$page -> initialize();
+echo $page -> render();

@@ -1,5 +1,8 @@
 {
   "autoload": {
-    "psr-0": { "Html": "./src" }
+    "psr-0": {
+      "NanoFramework": "./src",
+      "MyWebsite": "./src"
+    }
   }
 }

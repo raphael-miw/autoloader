@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /
+
+# add trailing slash if missing
+rewriteRule ^(.*)$ index.php [L]
