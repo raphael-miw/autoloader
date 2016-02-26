@@ -6,6 +6,6 @@
 <body>
 <header>Header</header>
 <?php echo $body ?>
-<header>Footer</header>
+<footer>Footer</footer>
 </body>
 </html>
