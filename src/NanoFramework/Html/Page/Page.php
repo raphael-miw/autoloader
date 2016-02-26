@@ -57,6 +57,7 @@ abstract class Page
         $url_attendue = $this -> getUrl();
         if( $url_attendue && $url_attendue != $this -> request_url) {
             header("Location: ".$url_attendue,true,302);
+            exit;
         }
     }
 }
