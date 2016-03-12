@@ -9,9 +9,9 @@
 namespace MyWebsite\Pages;
 
 
-use NanoFramework\Html\Page\Controller;
+use NanoFramework\Html\Page\FrontController;
 
-class ControllerSimpleHTML extends Controller
+class ControllerSimpleHTML extends FrontController
 {
 
     protected $root_dir = null;

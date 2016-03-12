@@ -9,7 +9,7 @@
 namespace NanoFramework\Html;
 
 
-use NanoFramework\Html\Page\Page;
+use NanoFramework\Html\Page\Controller;
 
 abstract class SimpleRouteur
 {
@@ -21,7 +21,15 @@ abstract class SimpleRouteur
     {
     }
 
-    /** @return Page */
+    /**
+     * @param $match
+     * @param $controller
+     * TODO
+     */
+    public function addRoute($match,$controller) {
+
+    }
+    /** @return Controller */
     abstract public function getPage();
 
 

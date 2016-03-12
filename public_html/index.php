@@ -1,4 +1,6 @@
 <?php
+ini_set("display_errors","on");
+
 
 /** @var \Composer\Autoload\ClassLoader $autoloader */
 $autoloader = require "../vendor/autoload.php";

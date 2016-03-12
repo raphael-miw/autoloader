@@ -15,10 +15,11 @@ abstract class Controller
 {
     protected $request_url;
     protected $template_loader;
+    protected $data_page = array();
 
-    public function __construct()
+    public function __construct($tpl_path)
     {
-        $this -> template_loader = new SimpleTemplateLoader("../templates");
+        $this -> template_loader = new SimpleTemplateLoader($tpl_path);
     }
 
     public function __toString()
@@ -26,38 +27,15 @@ abstract class Controller
         return "page de type ".get_class($this);
     }
 
-    abstract public function getContenu();
-    abstract public function getMetaDesc();
-    abstract public function getTitle();
-    abstract public function getUrl();
-
     public function render() {
-        $data_page = array(
-            "meta_desc" => $this -> getMetaDesc(),
-            "title" => $this -> getTitle(),
-            "body" => $this -> getContenu()
-        );
+        return $this -> template_loader -> render("modele.tpl.php",$this -> data_page);
+    }
 
-        return $this -> template_loader -> render("modele.tpl.php",$data_page);
-
+    public function assign($data) {
+        $this -> data_page = array_merge($this->data_page,$data);
     }
 
 
-    public function initialize()
-    {
-        $this -> checkUrl();
-    }
+    abstract public function initialize();
 
-    public function setRequestURL($url) {
-        $this -> request_url = $url;
-    }
-
-    protected function checkUrl()
-    {
-        $url_attendue = $this -> getUrl();
-        if( $url_attendue && $url_attendue != $this -> request_url) {
-            header("Location: ".$url_attendue,true,302);
-            exit;
-        }
-    }
 }

@@ -11,7 +11,7 @@ namespace MyWebsite\Pages;
 
 use NanoFramework\Html\Page\Controller;
 
-class ControllerRealisation extends Controller
+class ControllerRealisation extends FrontController
 {
     protected $id_realisation;
 

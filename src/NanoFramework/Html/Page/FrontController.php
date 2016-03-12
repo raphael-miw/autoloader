@@ -11,15 +11,10 @@ namespace NanoFramework\Html\Page;
 
 use NanoFramework\Html\SimpleTemplateLoader;
 
-abstract class Controller
+abstract class FrontController extends Controller
 {
     protected $request_url;
     protected $template_loader;
-
-    public function __construct()
-    {
-        $this -> template_loader = new SimpleTemplateLoader("../templates");
-    }
 
     public function __toString()
     {
@@ -31,21 +26,14 @@ abstract class Controller
     abstract public function getTitle();
     abstract public function getUrl();
 
-    public function render() {
-        $data_page = array(
-            "meta_desc" => $this -> getMetaDesc(),
-            "title" => $this -> getTitle(),
-            "body" => $this -> getContenu()
-        );
-
-        return $this -> template_loader -> render("modele.tpl.php",$data_page);
-
-    }
-
-
     public function initialize()
     {
         $this -> checkUrl();
+        $this -> assign(array(
+            "meta_desc" => $this -> getMetaDesc(),
+            "title" => $this -> getTitle(),
+            "body" => $this -> getContenu()
+        ));
     }
 
     public function setRequestURL($url) {
