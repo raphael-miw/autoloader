@@ -11,7 +11,7 @@ namespace NanoFramework\Html\Page;
 
 use NanoFramework\Html\SimpleTemplateLoader;
 
-abstract class Page
+abstract class Controller
 {
     protected $request_url;
     protected $template_loader;

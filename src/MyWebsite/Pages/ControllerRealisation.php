@@ -9,9 +9,9 @@
 namespace MyWebsite\Pages;
 
 
-use NanoFramework\Html\Page\Page;
+use NanoFramework\Html\Page\Controller;
 
-class PageRealisation extends Page
+class ControllerRealisation extends Controller
 {
     protected $id_realisation;
 
