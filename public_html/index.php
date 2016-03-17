@@ -1,19 +1,18 @@
 <?php
-$page_name = $_GET["page"];
-$liste_pages = include "../config/detail_pages.php";
+require "../vendor/autoload.php";
 
-// contrôle que la page existe bien
-if(!isset($liste_pages[$page_name])) {
-    $page_name = "404";// exit("acces interdit");
-    header("HTTP/1.0 404 Not Found");
+
+// simplepage => simplepageController
+$controller_name = "Web\\Controllers\\".ucfirst($_GET["controller"]."Controller");
+
+if(class_exists($controller_name)) {
+    $controller = new $controller_name();
+
+    $actionName = $_GET["action"]."Action";
+//    $controller->displayAction();
+    $controller->$actionName();
+    
+} else {
+    throw new Exception("Le controlleur $controller_name n'existe pas");
 }
 
-$detail_page = $liste_pages[$page_name];
-
-$title = $detail_page["title"];
-
-include '../ressources/header.php';
-
-include "../ressources/body/".$page_name.".php";
-
-include '../ressources/footer.html';

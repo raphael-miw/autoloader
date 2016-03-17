@@ -1,0 +1,16 @@
+<ifModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine on
+
+    RewriteRule ^css/ - [L]
+    RewriteRule ^js/ - [L]
+    RewriteRule ^img/ - [L]
+    RewriteRule ^fonts/ - [L]
+
+    RewriteRule ^$ index.php?controller=simplepage&action=display&page=index [L]
+    RewriteRule ^contactez-nous$ index.php?controller=simplepage&action=display&page=contact [L]
+    RewriteRule ^le-blog index.php?controller=simplepage&action=display&page=blog [L]
+    RewriteRule ^(about|post) index.php?controller=simplepage&action=display&page=$1 [L]
+
+    RewriteRule ^([a-z]+)/([a-z]+) index.php?controller=$1&action=$2
+</ifModule>
