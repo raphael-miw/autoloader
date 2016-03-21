@@ -1,7 +1,7 @@
 <?php
-require "../vendor/autoload.php";
+//require "../vendor/autoload.php";
 
-Core\Database::configure("localhost","root","root","blog");
+//Core\Database::configure("localhost","root","root","blog");
 
 // configuration du chemin de nos controleurs
 $controller_manager = new \Web\Controllers\ControllerManager("\\Blog\\Controllers\\");

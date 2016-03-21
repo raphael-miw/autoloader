@@ -1,0 +1,9 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Web\\": "src/Web/",
+      "Blog\\": "src/Blog/",
+      "Core\\": "src/core/"
+    }
+  }
+}
