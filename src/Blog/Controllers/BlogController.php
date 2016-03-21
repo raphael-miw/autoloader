@@ -6,23 +6,23 @@
  * Time: 22:17
  */
 
-namespace Web\Controllers;
+namespace Blog\Controllers;
 
 
-use Web\Blog\Models\Post;
+use Blog\Models\PostModel;
+use Core\Database;
+use Web\Controllers\FrontController;
 
 class BlogController extends FrontController
 {
     public function listAction() {
         //récupération des posts
-        $posts = [
-                new Post(1),
-                new Post(56),
-                new Post(9),
-                new Post(2),
-                new Post(11)
-            ];
 
+        $liste_id_posts = Database::getInstance() -> query('SELECT id_post FROM post');
+        $posts = [];
+        foreach($liste_id_posts -> fetch_all(MYSQLI_ASSOC) AS $un_post) {
+            $posts[] = new PostModel($un_post["id_post"]);
+        }
         // préparatino des données du template
         $data = [
             "posts" => $posts

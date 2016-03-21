@@ -6,19 +6,26 @@
  * Time: 22:17
  */
 
-namespace Web\Controllers;
+namespace Blog\Controllers;
 
 
-use Web\Blog\Models\Post;
+use Blog\Models\PostModel;
+use Web\Controllers\FrontController;
 
 class PostController extends FrontController
 {
 
+    protected $id_post;
+
+    public function setParameters($params) {
+        $this -> id_post = $params["id_post"];
+    }
+
     public function detailAction() {
         //récupération du post
-        $post = new Post($_GET["id_post"]);
+        $post = new PostModel($this -> id_post);
 
-        // préparatino des données du template
+        // préparation des données du template
         $data = [
             "post" => $post
         ];

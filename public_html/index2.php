@@ -16,12 +16,15 @@ $controller_manager = new \Web\Controllers\ControllerManager("\\Blog\\Controller
 //$controller -> executeAction("display");
 
 
+// utilisation d'un "routage" dans le htaccess ou paramètres GET dans l'url
+// récupération du controleur
+$controleur = $controller_manager -> getController($_GET["controller"]);
 
-// utilisation d'un routeur
-$routeur = new \Blog\Routing\BlogRouter();
+// récupération des paramètres
+$parametres = $_GET;
+unset($parametres["controller"]);
+unset($parametres["action"]);
+$controleur -> setParameters($parametres);
 
-//affectation du ControllerManaget afin que le routeur sache quelle classe instancier
-$routeur -> setControllerManager($controller_manager);
-
-$routeur -> dispatch($_SERVER["REQUEST_URI"]);
-
+// execution de l'action
+$controleur -> executeAction($_GET["action"]);

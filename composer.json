@@ -1,5 +1,8 @@
 {
   "autoload": {
-    "psr-0": { "Web": "src/" }
+    "psr-0": {
+      "Web": "src/",
+      "": "src/"
+    }
   }
 }

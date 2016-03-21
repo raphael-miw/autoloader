@@ -6,12 +6,14 @@
  * Time: 21:58
  */
 
-namespace Web\Controllers;
+namespace Blog\Controllers;
 
+use Web\Controllers\Controller;
 
-class MailController extends AbstractController
+class MailController extends Controller
 {
     public function contactmeAction() {
         echo "contact !!";
+        
     }
 }

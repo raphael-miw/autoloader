@@ -1,5 +1,4 @@
 <?php
-use Web\Controllers\FrontController;
 
 /**
  * Created by PhpStorm.
@@ -7,7 +6,9 @@ use Web\Controllers\FrontController;
  * Date: 16/03/16
  * Time: 15:15
  */
-namespace Web\Controllers;
+namespace Blog\Controllers;
+
+use Web\Controllers\FrontController;
 
 class SimplepageController extends FrontController
 {
@@ -17,21 +18,29 @@ class SimplepageController extends FrontController
 
     public function displayAction()
     {
-
-        $page_name = isset($_GET["page"])? $_GET["page"] : "index";
-        if(in_array($page_name,$this -> page_list)) {
-            $this -> current_page = $page_name;
+        if($this -> hasParameter("page")) {
+            $page_name = $this -> getParameter("page");
+            // test de l'existence de la page dans une liste prédéfinie
+            if(in_array($page_name,$this -> page_list)) {
+                $this -> current_page = $page_name;
+            } else {
+                $this -> current_page = "404";
+            }
         } else {
-            $this -> current_page = "404";
+            $this->current_page = "404";
         }
+//        $page_name = isset($_GET["page"])? $_GET["page"] : "index";
 
+        // affectation de variables utilisables dans les templates.
         $data = array(
             "date_du_jour" => date("Y-m-d"),
             "prenom" => "raphael"
         );
 
+        // rendu de la page
         $html =  $this -> renderPage($this -> current_page,$data);
 
+        // affichage de la page
         echo $html ;
     }
 

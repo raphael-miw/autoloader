@@ -7,14 +7,17 @@
     RewriteRule ^img/ - [L]
     RewriteRule ^fonts/ - [L]
 
+#   cas de l'utilisation d'un routeur php
+   RewriteRule (.*) index.php [L]
+
 #   Pages génériques
-    RewriteRule ^$ index.php?controller=simplepage&action=display&page=index [L]
-    RewriteRule ^(about|contact) index.php?controller=simplepage&action=display&page=$1 [L]
+#    RewriteRule ^$ index.php?controller=simplepage&action=display&page=index [L]
+#    RewriteRule ^(about|contact) index.php?controller=simplepage&action=display&page=$1 [L]
 
 #   Le blog
-    RewriteRule ^le-blog index.php?controller=blog&action=list [L]
-    RewriteRule ^post/([0-9]+)$ index.php?controller=post&action=detail&id_post=$1 [L]
+#    RewriteRule ^le-blog index.php?controller=blog&action=list [L]
+#    RewriteRule ^post/([0-9]+)$ index.php?controller=post&action=detail&id_post=$1 [L]
 
-#   générique
-    RewriteRule ^([a-z]+)/([a-z]+) index.php?controller=$1&action=$2
+#   MVC générique
+#   RewriteRule ^([a-z]+)/([a-z]+) index.php?controller=$1&action=$2
 </ifModule>
