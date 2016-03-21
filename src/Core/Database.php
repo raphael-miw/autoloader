@@ -8,7 +8,18 @@
 
 namespace Core;
 
+/**
+ * Instance unique d'une BDD mysqli
+ *
+ * Configuration :
+ * Database::configure("localhost","root","root","blog");
+ *
+ * Execution d'une requete :
+ * Database::getInstance() -> query("SELECT * FROM auteur WHERE id_auteur = ".(int)$this -> id)
 
+ * Class Database
+ * @package Core
+ */
 class Database
 {
 

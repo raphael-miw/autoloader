@@ -2,13 +2,11 @@
     Options +FollowSymlinks
     RewriteEngine on
 
-    RewriteRule ^css/ - [L]
-    RewriteRule ^js/ - [L]
-    RewriteRule ^img/ - [L]
-    RewriteRule ^fonts/ - [L]
+#   Les dossiers qu'on laisse passer
+#    RewriteRule ^css/ - [L]
 
 #   cas de l'utilisation d'un routeur php
-   RewriteRule (.*) index.php [L]
+#   RewriteRule (.*) index.php [L]
 
 #   Pages génériques
 #    RewriteRule ^$ index.php?controller=simplepage&action=display&page=index [L]

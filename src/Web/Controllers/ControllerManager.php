@@ -31,16 +31,26 @@ class ControllerManager {
         }
     }
 
+    /**
+     * @param $controller_name
+     * @return bool
+     */
     private function controller_exists($controller_name)
     {
         // ex : simplepage => \Blog\Controllers\SimplepageController
         $full_controller_name = $this -> getFullControllerClass($controller_name);
+        
         if(class_exists($full_controller_name)) {
             return true;
         }
         return false;
     }
 
+    /**
+     * @param $controller_name
+     * @return string
+     * ex : simplepage => \Blog\Controllers\SimplepageController
+     */
     private function getFullControllerClass($controller_name)
     {
         return $this->controller_namespace.ucfirst(strtolower($controller_name))."Controller";

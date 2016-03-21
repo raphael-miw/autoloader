@@ -23,8 +23,13 @@ class AuteurModel extends Model
             -> fetch_assoc();
 
         $this -> nom = $fetch["nom"];
-        $this -> prenom = $fetch["prenom"];    }
+        $this -> prenom = $fetch["prenom"];
+    }
 
+    /**
+     * @return string
+     * ex : Raphaël H.
+     */
     public function getDisplayName()
     {
         return ucfirst(strtolower($this -> prenom)).' '.strtoupper(substr($this -> nom ,0,1)).".";
