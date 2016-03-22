@@ -23,7 +23,7 @@ abstract class DatabaseModel extends Model
      */
     protected $database;
     
-    public function __construct($id)
+    public function __construct($id = null,$autoHydrate = true)
     {
 
         // contrôles
@@ -37,9 +37,11 @@ abstract class DatabaseModel extends Model
         //TODO : injection de dépendance ?
         $this -> database = Database::getInstance();
 
-        parent::__construct($id,$autoHydrate = true);
+        parent::__construct($id,false);
 
-        $this -> hydrate($this -> fetchData());
+        if(!is_null($id) && $autoHydrate) {
+            $this -> hydrate($this -> fetchData());
+        }
 
     }
 

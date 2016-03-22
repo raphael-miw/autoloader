@@ -15,11 +15,13 @@ abstract class Model
 {
     public $id;
 
-    public function __construct($id,$autoHydrate = true) {
-        $this->id = $id;
+    public function __construct($id = null,$autoHydrate = true) {
+        if(!is_null($id)) {
+            $this->id = $id;
 
-        if($autoHydrate) {
-            $this -> hydrate($this -> fetchData());
+            if($autoHydrate) {
+                $this -> hydrate($this -> fetchData());
+            }
         }
     }
 
