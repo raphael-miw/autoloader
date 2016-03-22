@@ -14,7 +14,9 @@
         </li>
         <li>
             <?php if($service_user -> isConnected()):?>
-            <a href="/logout">Déconnexion</a>
+            <a href="/logout">Déconnexion
+                <br><small>(<?php echo $service_user -> getEmail() ?>)</small>
+            </a>
             <?php else: ?>
             <a href="/login">Connexion</a>
             <?php endif ?>

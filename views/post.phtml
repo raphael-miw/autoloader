@@ -1,5 +1,5 @@
 <?php
-/** @var \Model\PostModel $post */
+/** @var \Blog\Models\PostModel $post */
 ?>
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
@@ -10,7 +10,7 @@
                     <div class="post-heading">
                         <h1><?= $post -> sujet; ?></h1>
 <!--                        <h2 class="subheading">--><?php // echo $post -> soustitre; ?><!--</h2>-->
-                        <span class="meta">Posted by <a href="#"><?= $post -> auteur -> getDisplayName(); ?></a> on <?= $post -> date_post; ?></span>
+                        <span class="meta">Posted by <a href="/auteur/<?= $post -> auteur -> id ?>"><?= $post -> auteur -> getDisplayName(); ?></a> on <?= $post -> date_post; ?></span>
                     </div>
                 </div>
             </div>

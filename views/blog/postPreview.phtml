@@ -6,6 +6,6 @@
         <!--                        <h3 class="post-subtitle">-->
         <!--                        </h3>-->
     </a><?= $post -> sujet ?>
-    <p class="post-meta">Posted by <a href="#"><?= ucfirst(strtolower($post -> auteur -> prenom)).' '.strtoupper(substr($post -> auteur -> nom ,0,1))."." ?></a> on <?= $post -> date_post ?></p>
+    <p class="post-meta">Posted by <a href="/auteur/<?= $post -> auteur -> id ?>"><?= ucfirst(strtolower($post -> auteur -> prenom)).' '.strtoupper(substr($post -> auteur -> nom ,0,1))."." ?></a> on <?= $post -> date_post ?></p>
 </div>
 <hr>
