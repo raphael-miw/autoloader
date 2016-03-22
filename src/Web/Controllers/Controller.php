@@ -14,12 +14,12 @@ abstract class Controller
     
     public function executeAction($action_name)
     {
-        $method_name = strtolower($action_name)."Action";
+        $method_name = $action_name."Action";
         if(method_exists($this,$method_name)) {
 //            return $this -> {$method_name}();
             return call_user_func(array($this,$method_name));
         } else {
-            throw new \Exception("l'action $action_name n'existe pas dans le controleur ".get_class($this));
+            throw new \Exception("l'action $action_name"."Action n'existe pas dans le controleur ".get_class($this));
         }
     }
 
