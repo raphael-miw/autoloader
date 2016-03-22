@@ -11,10 +11,10 @@ namespace Blog\Controllers;
 
 use Blog\Models\PostModel;
 use Blog\View\BlogFrontView;
-use Web\Controllers\FrontController;
+use Web\Controllers\Controller;
 use Web\View\Data\FrontViewData;
 
-class PostController extends FrontController
+class PostController extends Controller
 {
 
     protected $id_post;
@@ -33,12 +33,7 @@ class PostController extends FrontController
         ];
 
         $vue = new BlogFrontView("post",$data);
-        $vue -> initWrapperData(new FrontViewData($post -> sujet,$post->message));
+        $vue -> setWrapperData(new FrontViewData($post -> sujet,$post->message));
         echo $vue -> render() ;
-    }
-
-    protected function getTitle()
-    {
-        return "Le Blog !";
     }
 }

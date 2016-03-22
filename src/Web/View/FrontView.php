@@ -20,22 +20,28 @@ class FrontView extends SimpleView
      */
     protected $wrapper_data = null;
 
+    /**
+     * @var SimpleView
+     */
+    protected $wrapper_view = null;
+
     // on "wrap" le contenu dans un "root_modele" qui contient les balises HTML de base
     public function render()
     {
         // 1 - rendu de la vue simple (le contenu)
         $html_content = parent::render(); 
 
+        if(is_null($this -> wrapper_view)) {
+            throw new \Exception("le wrapper n'a pas été défini");
+        }
         // 2 - rendu dun contenu inséré dans le root modele
-        $wrapper = new SimpleView($this -> wrapper_template_name);
+        $this -> wrapper_view -> addData($this -> wrapper_data);
+        $this -> wrapper_view -> assign($this -> wrapper_content_variable,$html_content);
 
-        $wrapper -> addData($this -> wrapper_data);
-        $wrapper -> assign($this -> wrapper_content_variable,$html_content);
-
-        return $wrapper -> render();
+        return $this -> wrapper_view -> render();
     }
     
-    public function initWrapperData(FrontViewData $data) {
+    public function setWrapperData(FrontViewData $data) {
         $this -> wrapper_data = $data;
     }
 
@@ -44,7 +50,7 @@ class FrontView extends SimpleView
      */
     protected function setWrapper($template_name,$content_var_name = "html_content")
     {
-        $this -> wrapper_template_name = $template_name;
+        $this -> wrapper_view = new SimpleView($template_name);
         $this -> wrapper_content_variable = $content_var_name;
     }
 }

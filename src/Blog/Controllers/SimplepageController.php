@@ -68,7 +68,7 @@ class SimplepageController extends Controller
         );
 
         $vue = new BlogFrontView("index",$data);
-        $vue -> initWrapperData(new FrontViewData("Oh my blog !"));
+        $vue -> setWrapperData(new FrontViewData("Oh my blog !"));
         echo $vue -> render();
     }
 

@@ -11,10 +11,11 @@ namespace Blog\Controllers;
 
 use Blog\Models\PostModel;
 use Blog\View\BlogFrontView;
-use Web\Controllers\FrontController;
+use Web\Controllers\Controller;
 use Web\Core\Database;
+use Web\View\Data\FrontViewData;
 
-class BlogController extends FrontController
+class BlogController extends Controller
 {
     public function listAction() {
         //récupération des posts
@@ -30,11 +31,7 @@ class BlogController extends FrontController
         ];
 
         $view = new BlogFrontView("blog",$data);
+        $view -> setWrapperData(new FrontViewData("Le blog ! "));
         echo $view -> render();
-    }
-
-    protected function getTitle()
-    {
-        return "Le Blog !";
     }
 }
