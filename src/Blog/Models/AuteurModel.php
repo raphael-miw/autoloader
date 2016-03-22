@@ -8,22 +8,18 @@
 
 namespace Blog\Models;
 
-use Web\Models\Model;
+use Web\Models\DatabaseModel;
 
-class AuteurModel extends Model
+class AuteurModel extends DatabaseModel
 {
 
+    protected $table_name = "auteur";
+
+    protected $primary_key_name = "id_auteur";
+
+    // propriétés qui seront remplies directement depuis la BDD
     public $nom;
     public $prenom;
-
-    public function hydrate()
-    {
-        $fetch = $this -> database
-            -> query("SELECT * FROM auteur WHERE id_auteur = ".(int)$this -> id)
-            -> fetch_assoc();
-
-        $this -> nom = $fetch["nom"];
-        $this -> prenom = $fetch["prenom"];    }
 
     public function getDisplayName()
     {
