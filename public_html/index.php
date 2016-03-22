@@ -7,6 +7,8 @@ use Web\View\SimpleView;
 
 require "../vendor/autoload.php";
 
+session_start();
+
 Database::configure("localhost","root","root","blog");
 
 // configuration du chemin de nos controleurs
@@ -18,10 +20,18 @@ SimpleView::$default_views_path = __DIR__."/../views/";
 // utilisation d'un routeur
 $routeur = new Router();
 
+$routeur -> addRoute(new Route("^/$","simplepage","displayHomepage",array("page" => "index")));
 $routeur -> addRoute(new Route("^/(contact|about)$","simplepage","display",array("page" => "$1")));
 $routeur -> addRoute(new Route("^/le-blog$","blog","list"));
 $routeur -> addRoute(new Route("^/post/([0-9]+)$","post","displayDetail",array("id_post" => "$1")));
-$routeur -> addRoute(new Route("^/$","simplepage","displayHomepage",array("page" => "index")));
+
+$routeur -> addRoute(new Route("^/login$","user","displayLogin"));
+$routeur -> addRoute(new Route("^/logout","user","logout"));
+$routeur -> addRoute(new Route("^/connect$","user","connect"));
+$routeur -> addRoute(new Route("^/private$","private","display"));
+
+
+// on finit par la route par défaut
 $routeur -> addRoute(new Route("(.*)","simplepage","display",array("page" => "404")));
 
 //affectation du ControllerManager afin que le routeur sache quelle classe instancier
