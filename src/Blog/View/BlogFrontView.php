@@ -10,6 +10,7 @@ class BlogFrontView extends FrontView {
 
     public function __construct($template, array $data = array())
     {
+        // on définit une enveloppe
         $this -> setWrapper("root_model");
         parent::__construct($template, $data);
         
