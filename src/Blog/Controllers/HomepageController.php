@@ -13,14 +13,11 @@ use Web\Controllers\FrontController;
 class HomepageController extends FrontController
 {
 
-    private $page_list = array("blog","index","about","contact","post");
-    private $current_page = null;
-
     public function displayAction()
     {
         // affectation de variables utilisables dans les templates.
         $data = array(
-            "date_du_jour" => date("Y-m-d"),
+            "date_du_jour" => date("Y-m-d H:i:s"),
         );
 
         // rendu de la page
