@@ -12,5 +12,12 @@
         <li>
             <a href="/contact">Contact</a>
         </li>
+        <li>
+            <?php if($service_user -> isConnected()):?>
+            <a href="/logout">Déconnexion</a>
+            <?php else: ?>
+            <a href="/login">Connexion</a>
+            <?php endif ?>
+        </li>
     </ul>
 </div>
