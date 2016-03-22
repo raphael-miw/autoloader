@@ -8,11 +8,16 @@
  */
 namespace Blog\Controllers;
 
-use Web\Controllers\FrontController;
+use Blog\View\BlogFrontView;
+use Web\Controllers\Controller;
 
-class SimplepageController extends FrontController
+class SimplepageController extends Controller
 {
 
+    /**
+     * @var array
+     * Liste des pages qu'on autorise
+     */
     private $page_list = array("blog","index","about","contact","post");
     private $current_page = null;
 
@@ -37,11 +42,8 @@ class SimplepageController extends FrontController
             "prenom" => "raphael"
         );
 
-        // rendu de la page
-        $html =  $this -> renderPage($this -> current_page,$data);
-
-        // affichage de la page
-        echo $html ;
+        $vue = new BlogFrontView($this -> current_page,$data);
+        echo $vue -> render();
     }
 
     protected function getTitle()

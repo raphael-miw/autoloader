@@ -10,8 +10,9 @@ namespace Blog\Controllers;
 
 
 use Blog\Models\PostModel;
-use Core\Database;
+use Blog\View\BlogFrontView;
 use Web\Controllers\FrontController;
+use Web\Core\Database;
 
 class BlogController extends FrontController
 {
@@ -27,8 +28,9 @@ class BlogController extends FrontController
         $data = [
             "posts" => $posts
         ];
-        
-        echo $this -> renderPage("blog",$data);
+
+        $view = new BlogFrontView("blog",$data);
+        echo $view -> render();
     }
 
     protected function getTitle()

@@ -10,6 +10,7 @@ namespace Blog\Controllers;
 
 
 use Blog\Models\PostModel;
+use Blog\View\BlogFrontView;
 use Web\Controllers\FrontController;
 
 class PostController extends FrontController
@@ -30,7 +31,8 @@ class PostController extends FrontController
             "post" => $post
         ];
         
-        echo $this -> renderPage("post",$data);
+        $view = new BlogFrontView("post",$data);
+        echo $view -> render() ;
     }
 
     protected function getTitle()
