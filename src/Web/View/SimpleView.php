@@ -82,4 +82,23 @@ class SimpleView
     {
         $this->template_extension = $template_extension;
     }
+
+    /**
+     * @param object|\stdClass|array $data
+     * Assigne un ensemble de clés / valeurs à notre template
+     */
+    public function addData($data)
+    {
+        if(is_object($data) || is_array($data)) {
+            foreach($data as $key => $value) {
+                $this -> assign($key, $value);
+            }
+        }
+    }
+
+    // assigne une clé / valeur pour notre template
+    public function assign($key, $value)
+    {
+        $this -> data[$key] = $value;
+    }
 }
