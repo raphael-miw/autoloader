@@ -13,29 +13,8 @@ namespace Web\Routing;
 use Web\Controllers\Controller;
 use Web\Controllers\ControllerManager;
 
-abstract class Router
+class Router
 {
-
-    /**
-     * Url à analyser
-     * @var string
-     */
-    protected $url;
-
-    /**
-     * @var string
-     */
-    protected $controller_name = null;
-    
-    /**
-     * @var array
-     */
-    protected $parameters = array();
-
-    /**
-     * @var string
-     */
-    protected $action_name= null;
 
     /**
      * gestionnaire de Controllers, permettant de connaitre le namespace
@@ -43,9 +22,11 @@ abstract class Router
      */
     protected $controller_manager;
 
-    public function setUrl($url) {
-        $this -> url = $url;
-    }
+    /**
+     * @var Route[]
+     */
+    protected $routes;
+
 
     /**
      * @param $url
@@ -53,13 +34,12 @@ abstract class Router
      * @throws \Exception
      */
     public function dispatch($url) {
-        // 
-        $this -> setUrl($url);
-        $this -> parseURL();
-        /** @var Controller $controller */
-        $controller = $this -> getController();
-        $controller -> setParameters($this -> parameters);
-        $controller -> executeAction($this -> action_name);
+        foreach($this -> routes as $route) {
+            if($route -> match($url)) {
+                $this -> execute($route);
+                return;
+            }
+        }
     }
 
     /**
@@ -70,21 +50,34 @@ abstract class Router
         $this -> controller_manager = $controller_manager;
     }
 
-    protected function getController()
+    protected function getController($controller_name)
     {
         if(is_null($this -> controller_manager)) {
             throw new \Exception("Le gestionnaire de controlleur (ControlerManager) doit être défini");
         }
-        if(!is_null($this -> controller_name)) {
-            return $this -> controller_manager -> getController($this->controller_name);
-        } else {
-            throw new \Exception("Controlleur non défini");
-        }
+        return $this -> controller_manager -> getController($controller_name);
+    }
+    
+    public function addRoute(Route $route) {
+        $this -> routes[] = $route;
     }
 
     /**
      * Analyse l'URL, et renseigne $controller_name et $action_name, et éventuellement $parameters
      * @return mixed
      */
-    abstract protected function parseURL();
+    protected function parseURL() {
+        
+    }
+
+    private function execute(Route $route)
+    {
+        /** @var Controller $controller */
+        $controller = $this -> getController($route -> getControllerName());
+
+        $controller -> setParameters($route -> getParametres());
+
+        $controller -> executeAction($route -> getAction());
+
+    }
 }
