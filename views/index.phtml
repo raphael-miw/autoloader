@@ -18,3 +18,7 @@
         <h2>Contenu de ma Homepage</h2>
     </div>
 </div>
+
+<?php
+echo $this -> renderTpl("blog/postPreview",["post" => $last_post]);
+?>
