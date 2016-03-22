@@ -22,6 +22,7 @@ class PostModel extends DatabaseModel
     public $sujet;
     public $message;
     public $date_post;
+    public $id_auteur;
 
     /**
      * @var AuteurModel
