@@ -30,6 +30,28 @@ class UserService {
 
     public function isConnected()
     {
+        //TODO : peut-être pas suffisant
         return isset($_SESSION["userData"]);
+    }
+
+    public function getDataUser() {
+        return $_SESSION["userData"];
+    }
+
+    public function getEmail() {
+        return $_SESSION["userData"]["email"];
+    }
+
+    public function logout()
+    {
+        unset($_SESSION["userData"]);
+    }
+
+    public function login($email, $password)
+    {
+        //TODO : rajouter les contrôles
+        $_SESSION["userData"] = array(
+            "email" => $email
+        );
     }
 }

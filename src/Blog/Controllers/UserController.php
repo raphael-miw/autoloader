@@ -17,19 +17,29 @@ use Web\View\Data\FrontViewData;
 
 class UserController extends Controller
 {
+    /**
+     * @var UserService
+     */
+    protected $service_user;
+
+    public function __construct()
+    {
+        $this -> service_user = UserService::getInstance();
+    }
+
     public function displayLoginAction() {
-//        TODO : gérer le cas ou on est deja connecté
-        if(UserService::getInstance() -> isConnected()) {
+        
+        if($this -> service_user -> isConnected()) {
             HttpResponse::redirect("/private");
         }
+        
         $view = new BlogFrontView("login");
         $view -> setWrapperData(new FrontViewData("Identification","","",FrontViewData::NOINDEX_NOFOLLOW));
         echo $view -> render();
     }
 
     public function logoutAction() {
-        //TODO : déplacer dans UserService
-        unset($_SESSION["userData"]);
+        $this -> service_user -> logout();
         HttpResponse::redirect("/");
     }
     public function connectAction() {
@@ -39,14 +49,14 @@ class UserController extends Controller
             //TODO : vérifier les informations en BDD
 
             // on stocke les informations (si valides)
-            //TODO : déplacer dans UserService
-            $_SESSION["userData"] = array(
-                "email" => $_POST["email"]
-            );
+            $this -> service_user -> login($_POST["email"],$_POST["password"]);
 
-            HttpResponse::redirect("/private");
-        } else {
-            HttpResponse::redirect("/login");
+            if($this -> service_user -> isConnected()) {
+                HttpResponse::redirect("/private");
+            }
+
         }
+        HttpResponse::redirect("/login");
+
     }
 }
