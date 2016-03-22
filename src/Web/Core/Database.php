@@ -6,7 +6,7 @@
  * Time: 21:17
  */
 
-namespace Core;
+namespace Web\Core;
 
 
 class Database
