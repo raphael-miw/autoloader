@@ -19,7 +19,7 @@ class BlogController extends FrontController
     public function listAction() {
         //récupération des posts
 
-        $liste_id_posts = Database::getInstance() -> query('SELECT id_post FROM post');
+        $liste_id_posts = Database::getInstance() -> query('SELECT id_post FROM post ORDER BY date_post DESC');
         $posts = [];
         foreach($liste_id_posts -> fetch_all(MYSQLI_ASSOC) AS $un_post) {
             $posts[] = new PostModel($un_post["id_post"]);
