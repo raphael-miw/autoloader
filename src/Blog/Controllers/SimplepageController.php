@@ -12,6 +12,7 @@ use Blog\Models\PostModel;
 use Blog\View\BlogFrontView;
 use Web\Controllers\Controller;
 use Web\Core\Database;
+use Web\View\Data\FrontViewData;
 
 class SimplepageController extends Controller
 {
@@ -67,6 +68,7 @@ class SimplepageController extends Controller
         );
 
         $vue = new BlogFrontView("index",$data);
+        $vue -> initWrapperData(new FrontViewData("Oh my blog !"));
         echo $vue -> render();
     }
 

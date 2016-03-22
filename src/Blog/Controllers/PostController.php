@@ -12,6 +12,7 @@ namespace Blog\Controllers;
 use Blog\Models\PostModel;
 use Blog\View\BlogFrontView;
 use Web\Controllers\FrontController;
+use Web\View\Data\FrontViewData;
 
 class PostController extends FrontController
 {
@@ -30,9 +31,10 @@ class PostController extends FrontController
         $data = [
             "post" => $post
         ];
-        
-        $view = new BlogFrontView("post",$data);
-        echo $view -> render() ;
+
+        $vue = new BlogFrontView("post",$data);
+        $vue -> initWrapperData(new FrontViewData($post -> sujet,$post->message));
+        echo $vue -> render() ;
     }
 
     protected function getTitle()
