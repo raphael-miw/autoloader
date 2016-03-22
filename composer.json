@@ -1,9 +1,6 @@
 {
   "autoload": {
     "psr-0": {
-      "Web": "src/",
-      "Blog": "src/",
-      "Core": "src/",
       "": "src/"
     }
   }
