@@ -9,7 +9,8 @@
 namespace Web\Models;
 
 
-use Core\Database;
+
+use Web\Core\Database;
 
 abstract class Model
 {
