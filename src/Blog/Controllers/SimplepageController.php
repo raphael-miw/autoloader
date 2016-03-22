@@ -8,8 +8,10 @@
  */
 namespace Blog\Controllers;
 
+use Blog\Models\PostModel;
 use Blog\View\BlogFrontView;
 use Web\Controllers\Controller;
+use Web\Core\Database;
 
 class SimplepageController extends Controller
 {
@@ -18,7 +20,7 @@ class SimplepageController extends Controller
      * @var array
      * Liste des pages qu'on autorise
      */
-    private $page_list = array("blog","index","about","contact","post");
+    private $page_list = array("about","contact");
     private $current_page = null;
 
     public function displayAction()
@@ -42,23 +44,30 @@ class SimplepageController extends Controller
             "prenom" => "raphael"
         );
 
-        $vue = new BlogFrontView($this -> current_page,$data);
+        $template_name = $this -> current_page;
+
+        $vue = new BlogFrontView($template_name,$data);
         echo $vue -> render();
     }
 
-    protected function getTitle()
-    {
-        switch($this -> current_page) {
-            case "blog":
-                return "le blog";
-            case "index":
-                return "Welcome !";
-            case "about":
-                return "à propos ...";
-            case "contact":
-                return "contactez-nous.";
-            default:
-                return "Page not found";
-        }
+
+    public function displayHomepageAction() {
+
+        // récupération du dernier post
+        $data_last_post = Database::getInstance()
+            -> query("SELECT * FROM post ORDER BY date_post DESC LIMIT 1 ")
+            -> fetch_object();
+
+        // création du modele
+        $last_post = new PostModel();
+        $last_post -> hydrate($data_last_post);
+
+        $data = array(
+            "last_post" => $last_post
+        );
+
+        $vue = new BlogFrontView("index",$data);
+        echo $vue -> render();
     }
+
 }

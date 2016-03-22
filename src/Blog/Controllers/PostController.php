@@ -22,7 +22,7 @@ class PostController extends FrontController
         $this -> id_post = $params["id_post"];
     }
 
-    public function detailAction() {
+    public function displayDetailAction() {
         //récupération du post
         $post = new PostModel($this -> id_post);
 

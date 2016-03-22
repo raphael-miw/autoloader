@@ -20,8 +20,8 @@ $routeur = new Router();
 
 $routeur -> addRoute(new Route("^/(contact|about)$","simplepage","display",array("page" => "$1")));
 $routeur -> addRoute(new Route("^/le-blog$","blog","list"));
-$routeur -> addRoute(new Route("^/post/([0-9]+)$","post","detail",array("id_post" => "$1")));
-$routeur -> addRoute(new Route("^/$","simplepage","display",array("page" => "index")));
+$routeur -> addRoute(new Route("^/post/([0-9]+)$","post","displayDetail",array("id_post" => "$1")));
+$routeur -> addRoute(new Route("^/$","simplepage","displayHomepage",array("page" => "index")));
 $routeur -> addRoute(new Route("(.*)","simplepage","display",array("page" => "404")));
 
 //affectation du ControllerManager afin que le routeur sache quelle classe instancier
