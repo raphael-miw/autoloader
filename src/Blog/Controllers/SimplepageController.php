@@ -22,6 +22,11 @@ class SimplepageController extends Controller
      * Liste des pages qu'on autorise
      */
     private $page_list = array("about","contact");
+    private $titres = array(
+        "about" => "A propos de nous",
+        "contact" => "Contactez-nous",
+        "404" => "Page not found ..."
+    );
     private $current_page = null;
 
     public function displayAction()
@@ -48,6 +53,7 @@ class SimplepageController extends Controller
         $template_name = $this -> current_page;
 
         $vue = new BlogFrontView($template_name,$data);
+        $vue -> setWrapperData(new FrontViewData($this -> titres[$this -> current_page]));
         echo $vue -> render();
     }
 
@@ -68,7 +74,7 @@ class SimplepageController extends Controller
         );
 
         $vue = new BlogFrontView("index",$data);
-        $vue -> setWrapperData(new FrontViewData("Oh my blog !"));
+        $vue -> setWrapperData(new FrontViewData(""));
         echo $vue -> render();
     }
 
