@@ -10,22 +10,20 @@ namespace Web\Models;
 
 
 
-use Web\Core\Database;
 
 abstract class Model
 {
     public $id;
 
-    /**
-     * @var \mysqli
-     */
-    protected $database;
+    public function __construct($id,$autoHydrate = true) {
+        $this->id = $id;
 
-    public function __construct($id) {
-        $this -> id = $id;
-        $this -> database = Database::getInstance();
-        $this -> hydrate();
+        if($autoHydrate) {
+            $this -> hydrate($this -> fetchData());
+        }
     }
 
-    abstract public function hydrate();
+    abstract public function fetchData();
+
+    abstract public function hydrate($data);
 }
