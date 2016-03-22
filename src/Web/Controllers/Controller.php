@@ -11,21 +11,7 @@ namespace Web\Controllers;
 
 abstract class Controller
 {
-    // static pour simplifier, mais il faudra éviter (cf injection de dépendances)
-    /** @var string  */
-    public static $default_views_path = "views/";
-
-    public $views_path = null;
-
-    public function renderTpl($vue,$data=array()) {
-        extract($data);
-
-        ob_start();
-        include $this -> getViewsPath().$vue.".phtml";
-        return ob_get_clean();
-
-    }
-
+    
     public function executeAction($action_name)
     {
         $method_name = strtolower($action_name)."Action";
@@ -79,25 +65,6 @@ abstract class Controller
         return $this -> parameters[$parameter_name];
     }
 
-    /**
-     * @param string $views_path
-     * @return Controller
-     */
-    public function setViewsPath($views_path)
-    {
-        $this->views_path = $views_path;
-        return $this;
-    }
 
-    /**
-     * @return null
-     */
-    public function getViewsPath()
-    {
-        if(!is_null($this->views_path)) {
-            return $this->views_path;
-        }
-        return self::$default_views_path;
-    }
 
 }
