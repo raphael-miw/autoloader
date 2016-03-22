@@ -15,14 +15,6 @@ $controller_manager = new ControllerManager("\\Blog\\Controllers\\");
 // configuration du chemin par défaut aux vues
 SimpleView::$default_views_path = __DIR__."/../views/";
 
-// exemple d'utilisation
-//$controller = $controller_manager -> getController("simplepage");
-//$controller -> setParameter("page","index");
-//$controller -> setParameters(array("page" => "index"));
-//$controller -> executeAction("display");
-
-
-
 // utilisation d'un routeur
 $routeur = new Router();
 
