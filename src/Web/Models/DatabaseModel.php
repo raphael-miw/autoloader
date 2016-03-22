@@ -82,6 +82,11 @@ abstract class DatabaseModel extends Model
             }
         }
 
+        // transfert de la primary key
+        if(property_exists($fetch,$this -> primary_key_name)) {
+            $this -> id = $fetch -> {$this -> primary_key_name};
+        }
+
     }
 
 }
